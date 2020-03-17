@@ -13,6 +13,9 @@ dependencies:
   # 网络请求框架
   dio: ^3.0.9
 
+  #格式化字符串
+  sprintf: ^4.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
