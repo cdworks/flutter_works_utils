@@ -13,6 +13,18 @@ dependencies:
   # 网络请求框架
   dio: ^3.0.9
 
+  # 文件路径及操作
+  path_provider: ^1.6.0
+
+  #播放器
+  video_player: ^0.10.3+3
+
+  #flutter toast
+  toast: ^0.1.5
+
+  #屏幕旋转
+  auto_orientation: ^1.0.6
+
   #格式化字符串
   sprintf: ^4.0.2
 
@@ -27,8 +39,8 @@ dev_dependencies:
 flutter:
 
   # To add assets to your package, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
+  assets:
+    - utilImages/music_bg.jpeg
   #  - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
