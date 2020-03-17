@@ -15,6 +15,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.5.2"
+  asset_picker:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "3d46e9f3fbba17ab2882f53585aa670cd69dff2f"
+      url: "git://github.com/cdworks/flutter_asset_picker.git"
+    source: git
+    version: "0.0.1"
   async:
     dependency: transitive
     description:
@@ -156,6 +165,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.4.0"
+  photo_view:
+    dependency: "direct main"
+    description:
+      name: photo_view
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.8.2"
   platform:
     dependency: transitive
     description:

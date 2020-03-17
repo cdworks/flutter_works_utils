@@ -13,8 +13,16 @@ dependencies:
   # 网络请求框架
   dio: ^3.0.9
 
+
+  asset_picker:
+    git:
+      url: git://github.com/cdworks/flutter_asset_picker.git
+
   # 文件路径及操作
   path_provider: ^1.6.0
+
+  #图片预览
+  photo_view: ^0.8.0
 
   #播放器
   video_player: ^0.10.3+3
