@@ -19,7 +19,7 @@ class WorksVideoPlayerScaffold extends CupertinoPageScaffold {
   final String musicBgPath; //音乐背景图片
 
   const WorksVideoPlayerScaffold({this.videoUrl, this.videoPath,this
-      .isNeedLoad = false,this.isAudio = false,this.musicBgPath = 'utilImages/music_bg.jpeg'})
+      .isNeedLoad = false,this.isAudio = false,this.musicBgPath})
       : super(child: const Text(''));
 
   @override
@@ -321,7 +321,7 @@ class _MainWidget extends State<MainWidget>
             ),
                 Offstage(offstage: !widget.isAudio ||  _controller == null ||
                     !_controller.value.initialized,child: Center(
-                  child: Image.asset(widget.musicBgPath),
+                  child: Image.asset(widget.musicBgPath ?? 'utilImages/music_bg.png',package: widget.musicBgPath == null ? 'works_utils':null,),
                 ),),
             Visibility(
                 visible: showPlayIcon,
