@@ -1,5 +1,17 @@
 library works_utils;
 
+import 'package:flutter/foundation.dart';
+
+
+class WorksChangeNotifier with ChangeNotifier
+{
+  @override
+  void notifyListeners() {
+    // TODO: implement notifyListeners
+    super.notifyListeners();
+  }
+}
+
 /// A Calculator.
 class WorksUtils {
   /// Returns [value] plus 1.
