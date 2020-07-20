@@ -1,5 +1,7 @@
 library works_utils;
 
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 
 
@@ -17,7 +19,10 @@ class WorksUtils {
   /// Returns [value] plus 1.
   static var weekStrings = ['星期一','星期二','星期三','星期四','星期五','星期六','星期日'];
   static var shortWeekStrings = ['周一','周二','周三','周四','周五','周六','周日'];
+  static var vertyShortWeekStrings = ['一','二','三','四','五','六','日'];
   static String formatDate(DateTime date, String dateFormatter) {
+    if(date == null)
+      return '';
     StringBuffer buffer = StringBuffer();
     String dateString = dateFormatter;
 
@@ -99,6 +104,11 @@ class WorksUtils {
         buffer.write(shortWeekStrings[date.weekday-1]);
         len = 3;
       }
+      else if (dateString.startsWith('ee') || (dateString.startsWith('EE'))) {
+        buffer.write(vertyShortWeekStrings[date.weekday-1]);
+        len = 2;
+      }
+      
 
       else {
         buffer.write(dateString.substring(0, 1));
@@ -122,6 +132,32 @@ class WorksUtils {
     return formatDate(date,'yyyy/M/d HH:mm');
 
   }
+
+  static String convertCardNum(String cardNum)
+  {
+    if(cardNum == null || cardNum.length < 5)
+      return cardNum;
+
+    String formatString = '';
+
+    int len = cardNum.length ~/ 4;
+    if(cardNum.length % 4 == 0)
+      {
+        len--;
+      }
+    for(int i = 0;i<len;i++)
+      {
+        formatString += cardNum.substring(i*4,min(cardNum.length,(i+1)*4)) + ' ';
+      }
+
+    if(len*4 < cardNum.length)
+    {
+      formatString += cardNum.substring(len*4,cardNum.length);
+    }
+
+    return formatString;
+  }
+
 }
 
 

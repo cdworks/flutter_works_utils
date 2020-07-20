@@ -1,5 +1,6 @@
 
  import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class EllipsisText extends StatelessWidget
  {
@@ -128,5 +129,38 @@ class EllipsisText extends StatelessWidget
       child: Text(data,style: style,strutStyle: strutStyle,textAlign: textAlign,textDirection: textDirection,locale: locale,softWrap: softWrap,overflow: overflow,textScaleFactor: textScaleFactor,semanticsLabel: semanticsLabel,textWidthBasis: textWidthBasis),
     );
   }
+
+ }
+
+ class WorksPopupRoute<T>  extends PopupRoute<T>
+ {
+   final Widget child;
+   final WidgetBuilder build;
+   final bool _barrierDismissible;
+
+    WorksPopupRoute({@required this.child,this.build,bool barrierDismissible = true}) : assert(barrierDismissible != null),
+          _barrierDismissible = barrierDismissible;  //this.child , this.build 二选一，为了兼容代码
+
+   @override
+   // TODO: implement barrierColor
+   Color get barrierColor =>  Colors.black54;
+
+   @override
+   // TODO: implement barrierDismissible
+   bool get barrierDismissible => _barrierDismissible;
+
+   @override
+   // TODO: implement barrierLabel
+   String get barrierLabel=>null;
+
+   @override
+   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+     // TODO: implement buildPage
+     return child ?? build(context);
+   }
+
+   @override
+   // TODO: implement transitionDuration
+   Duration get transitionDuration => const Duration(milliseconds: 200);
 
  }

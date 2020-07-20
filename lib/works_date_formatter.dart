@@ -1,5 +1,20 @@
 
+import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
+
+///定义时间单位所包含的秒数
+
+const int D_MINUTE_SECONDS	= 60;
+const int D_HOUR_SECONDS		= 3600;
+const int D_DAY_SECONDS		= 86400;
+const int D_WEEK_SECONDS	=	604800;
+const int D_YEAR_SECONDS	=	31556926;
+
+const int D_MINUTE_MS	= 60000;
+const int D_HOUR_MS		= 3600000;
+const int D_DAY_MS		= 86400000;
+const int D_WEEK_MS	=	604800000;
+const int D_YEAR_MS	=	31556926000;
 
 class WorksDateFormat
 {
@@ -98,15 +113,93 @@ class WorksDateFormat
     return buffer.toString();
   }
 
+
+  ///去掉某天的时分秒 比如 2019/12/21 00:00:00
+
+  static DateTime dateAtStartOfDay()
+  {
+    return  DateTime(DateTime.now().year,0,0,0);
+  }
+
+
+  ///昨天今天明天相关操作
+  ///
+
+  static DateTime dateTomorrow()
+  {
+    return DateTime.now().add(Duration(days: 1));
+  }
+  static DateTime dateYesterday()
+  {
+    return DateTime.now().subtract(Duration(days: 1));
+  }
+  
+  static bool isToday(DateTime date)
+  {
+    var now = DateTime.now();
+    return date.year == now.year && date.month == now.month && date.day == now.day;
+  }
+
+  static bool isThisYear(DateTime date)
+  {
+    var now = DateTime.now();
+    return date.year == now.year;
+  }
+
+  static bool isTomorrow(DateTime date)
+  {
+    var tomorrow = dateTomorrow();
+    return date.year == tomorrow.year && date.month == tomorrow.month && date.day == tomorrow.day;
+  }
+
+  static bool isYesterday(DateTime date)
+  {
+    var yesterday = dateYesterday();
+    return date.year == yesterday.year && date.month == yesterday.month && date.day == yesterday.day;
+  }
+
+
+
+//  static bool isThisWeek(DateTime date,BuildContext context)
+//  {
+//    var now = DateTime.now();
+//    MaterialLocalizations localizations = MaterialLocalizations.of(context);
+//    DateTime epoch = DateTime.utc(1970);
+//    dateTime = new DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
+//
+//    int offset = EPOCH_WEEK_DAY - weekStart;
+//    if (offset < 0) {
+//      offset += 7;
+//    }
+//
+//    int delta = EPOCH_JULIAN_DAY - offset;
+//
+//    return (date.difference(epoch).inDays - delta) ~/ 7;
+//    return (date.weekday == date.weekday);
+//  }
+
+
+  ///转换日期
+
   static String formatterTimestamp(int timestamp)
   {
     var date = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    var now = DateTime.now();
-    StringBuffer buffer = StringBuffer();
-    if(date.year == now.year)
+
+    if(isToday(date))
+      {
+        return formatDate(date,'HH:mm');
+      }
+
+    if(isYesterday(date))
+      {
+        return formatDate(date,'昨天 HH:mm');
+      }
+
+    if(isThisYear(date))
       {
         return formatDate(date,'M月d日 HH:mm');
       }
+
     return formatDate(date,'yyyy/M/d HH:mm');
 
   }
@@ -120,8 +213,8 @@ class WorksDateFormat
       }
 
     String formatString = '';
-    int hours = seconds ~/ 3600;
-    int minutes = (seconds % 3600) ~/ 60;
+    int hours = seconds ~/ D_HOUR_SECONDS;
+    int minutes = (seconds % D_HOUR_SECONDS) ~/ 60;
     int sec = seconds % 60;
     if(hours > 0)
       {

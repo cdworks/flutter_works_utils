@@ -18,4 +18,8 @@ class WorksError extends Error
 
     String get localizedDescription  => userInfo[LocalizedDescriptionKey] ?? "";
 
+  String toString() {
+    return "worksError domain:$domain code:$code msg:$localizedDescription";
+  }
+
 }
