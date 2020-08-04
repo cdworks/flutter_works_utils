@@ -1,14 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:works_utils/works_utils.dart';
-import 'package:works_utils/net/works_http_manager.dart';
+
 
 void main(){
   test('adds one to input values', () async {
 
 
     ///时间 格式转换
-    print('result: ${WorksUtils.formatDate(DateTime.now(), "yyyy-mm-dd")}');
+    print('result: ${WorksUtility.formatDate(DateTime.now(), "yyyy-mm-dd")}');
 
     /// 数据请求 设置baseurl及timeout
     HttpManager.configureManager('http://ynkysy.zimujiaoyu.com/');

@@ -4,11 +4,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:works_utils/works_date_formatter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:toast/toast.dart';
 import 'package:dio/dio.dart';
+import '../works_utils.dart';
 import 'file_cache_util.dart';
 
 class WorksVideoPlayerScaffold extends CupertinoPageScaffold {

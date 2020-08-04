@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:toast/toast.dart';
-import 'package:works_utils/net/works_http_manager.dart';
+import '../net/works_http_manager.dart';
 
 
 abstract class WorksBaseRequestPageState <T extends StatefulWidget> extends State<T>

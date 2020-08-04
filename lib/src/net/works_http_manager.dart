@@ -2,10 +2,11 @@
 import 'dart:async';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import '../coustom/works_error.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dio/dio.dart';
+
+import '../custom/works_error.dart';
 
 enum ResponseDataType
 {
@@ -424,7 +425,7 @@ class HttpResponseData<T>
 class _WorksResponseData<T>
 {
 
-  const _WorksResponseData({this.data,this.request,this.statusCode,this.errorMessage,this.type});
+    _WorksResponseData({this.data,this.request,this.statusCode,this.errorMessage,this.type});
 
    final T data;
    final RequestOptions request;
@@ -490,8 +491,17 @@ class _HttpSessionManager
     interceptors.add(InterceptorsWrapper(
         onResponse: (Response response) async
         {
-          return _dio.resolve(_WorksResponseData(
-              request: response.request, data: response.data as Map<String,dynamic>, statusCode: 0));
+          if(response.data is Map<String,dynamic>)
+            {
+              return _dio.resolve(_WorksResponseData(
+                  request: response.request, data: response.data as Map<String,dynamic>, statusCode: 0));
+            }
+          else
+            {
+              return _dio.resolve(_WorksResponseData(
+                  request: response.request, errorMessage: '请求数据异常!',data: null, statusCode: -2000));
+            }
+
         },
         onError: (DioError error) async
         {

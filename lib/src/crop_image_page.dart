@@ -3,9 +3,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-//import 'package:image_crop/image_crop.dart';
 import 'package:simple_image_crop/simple_image_crop.dart';
-import 'package:works_utils/works_cupertino_navigation_bar.dart';
 import 'package:works_utils/works_utils.dart';
 
 class CropImagePageScaffold extends CupertinoPageScaffold {
