@@ -241,12 +241,12 @@ packages:
     source: hosted
     version: "1.9.0"
   photo_view:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      name: photo_view
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.8.2"
+      path: "/Users/liping/works_github/works_photo_view"
+      relative: false
+    source: path
+    version: "0.8.0"
   platform:
     dependency: transitive
     description:

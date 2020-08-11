@@ -209,7 +209,6 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper>
                   GestureDetector(
                     onDoubleTap: ()
                     {
-
                     },
                     child: Image.file(File(thumbPath),
                       color: CupertinoDynamicColor.withBrightness(color: const Color(0xFFFFFFFF), darkColor: Color(0xFFB0B0B0)).resolveFrom(context),
