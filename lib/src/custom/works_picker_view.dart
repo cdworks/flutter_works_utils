@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../extension/works_cupertino_dynamicColor_ext.dart';
 import '../../works_utils.dart';
 
 void showWorksPickerView(BuildContext context, {@required ValueChanged<int> onSelectedItemChanged,
@@ -110,7 +111,7 @@ class _WorksPickerView extends State<WorksPickerView> with SingleTickerProviderS
               Container(
                 height: 36,
                 padding: EdgeInsets.only(left: 15,right: 15),
-                color: widget.bgColor,
+                color: widget.bgColor.toInvertDynamicColor().resolveFrom(context),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

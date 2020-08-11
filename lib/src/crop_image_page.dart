@@ -34,22 +34,22 @@ class CropImagePageScaffold extends CupertinoPageScaffold {
 
   @override
   // TODO: implement child
-  Widget get child =>  SafeArea(top: true, child: MainWidget(this.imageFile,this.useChangeNotifier));
+  Widget get child =>  SafeArea(top: true, child: _MainWidget(this.imageFile,this.useChangeNotifier));
 }
 
-class MainWidget extends StatefulWidget {
-  const MainWidget(this.imageFile,this.useChangeNotifier);
+class _MainWidget extends StatefulWidget {
+  const _MainWidget(this.imageFile,this.useChangeNotifier);
   final WorksChangeNotifier useChangeNotifier;
   final File imageFile;
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _MainWidget();
+    return __MainWidget();
   }
 }
 
-class _MainWidget extends State<MainWidget> {
+class __MainWidget extends State<_MainWidget> {
 
   final cropKey = GlobalKey<ImgCropState>();
 
@@ -102,7 +102,7 @@ class _MainWidget extends State<MainWidget> {
   }
 
   @override
-  void didUpdateWidget(MainWidget oldWidget) {
+  void didUpdateWidget(_MainWidget oldWidget) {
     // TODO: implement didUpdateWidget
 
     if(oldWidget.useChangeNotifier != widget.useChangeNotifier)

@@ -6,6 +6,7 @@ export 'src/file_cache_util.dart';
 export 'src/work_cupertino_textfield.dart';
 export 'src/works_cupertino_navigation_bar.dart';
 export 'src/works_date_formatter.dart';
+export 'src/works_video_player.dart';
 export 'src/works_image_provider.dart';
 export 'src/works_keyboard_toolbar.dart';
 export 'src/works_photo_browser.dart';

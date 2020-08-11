@@ -11,6 +11,7 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:toast/toast.dart';
 import '../net/works_http_manager.dart';
+import '../extension/works_cupertino_dynamicColor_ext.dart';
 
 
 abstract class WorksBaseRequestPageState <T extends StatefulWidget> extends State<T>
@@ -157,14 +158,14 @@ abstract class WorksBaseRequestPageState <T extends StatefulWidget> extends Stat
         if(showNoDataWidget)
           Container(
             margin: tipsPagePadding,
-            color: noDataBgColor ?? const Color(0xFFFFFFFF),
+            color: (noDataBgColor ?? const Color(0xFFFFFFFF)).toInvertDynamicColor().resolveFrom(context),
             child: Center(
                 child:noDataWidget(context)
             )),
         if(showNoNetWidget)
           Container(
             margin: tipsPagePadding,
-            color: noNetBgColor ?? const Color(0xFFFFFFFF),
+            color: (noNetBgColor ?? const Color(0xFFFFFFFF)).toInvertDynamicColor().resolveFrom(context),
             child: Center(
                 child:noNetActionWidget(context,reRequestData)
             ),)
@@ -210,7 +211,7 @@ abstract class WorksBaseListWidgetState <T extends StatefulWidget> extends Works
 
   WidgetBuilder headerBuilder;  //头部widget 不滚动
   WidgetBuilder footerBuilder;  //尾部widget 不滚动
-
+  final ScrollController controller = ScrollController();
 
   @protected
   bool get dataContainerTotalField => false;  //根据http请求数据是否包含total字段,也就是data就是数组，常规的是
@@ -249,7 +250,9 @@ abstract class WorksBaseListWidgetState <T extends StatefulWidget> extends Works
       totalCount++;
     }
 
-    final listView = dividerBuilder == null ?  ListView.builder(itemBuilder: (ctx,index)
+    final listView = dividerBuilder == null ?  ListView.builder(
+      controller: controller,
+      itemBuilder: (ctx,index)
     {
       int realIndex = index;
       if(tableHeaderBuilder != null)
@@ -266,7 +269,9 @@ abstract class WorksBaseListWidgetState <T extends StatefulWidget> extends Works
       }
       return createCell(ctx, realIndex);
 
-    },itemCount: totalCount,) : ListView.separated(itemBuilder: (ctx,index)
+    },itemCount: totalCount,) : ListView.separated(
+      controller: controller,
+        itemBuilder: (ctx,index)
     {
       int realIndex = index;
       if(tableHeaderBuilder != null)
@@ -402,6 +407,7 @@ abstract class WorksBasePageListWidgetState <T extends StatefulWidget> extends W
   WidgetBuilder headerBuilder;  //头部widget 不滚动
   WidgetBuilder footerBuilder;  //尾部widget 不滚动
 
+  final ScrollController controller = ScrollController();
 
 
 
@@ -444,7 +450,7 @@ abstract class WorksBasePageListWidgetState <T extends StatefulWidget> extends W
       height: 1,
       indent: dividerOffset(context, index).dx,
       endIndent: dividerOffset(context, index).dy,
-      color: dividerColor(context,index),
+      color: dividerColor(context,index).toInvertDynamicColor().resolveFrom(context),
     );
 
     super.initState();
@@ -556,7 +562,9 @@ abstract class WorksBasePageListWidgetState <T extends StatefulWidget> extends W
       totalCount++;
     }
 
-    final listView = dividerBuilder == null ?  ListView.builder(itemBuilder: (ctx,index)
+    final listView = dividerBuilder == null ?  ListView.builder(
+      controller: controller,
+      itemBuilder: (ctx,index)
     {
       int realIndex = index;
       if(tableHeaderBuilder != null)
@@ -573,7 +581,9 @@ abstract class WorksBasePageListWidgetState <T extends StatefulWidget> extends W
       }
       return createCell(ctx, realIndex);
 
-    },itemCount: totalCount,) : ListView.separated(itemBuilder: (ctx,index)
+    },itemCount: totalCount,) : ListView.separated(
+      controller: controller,
+        itemBuilder: (ctx,index)
     {
       int realIndex = index;
       if(tableHeaderBuilder != null)

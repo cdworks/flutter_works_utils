@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'dart:math' as math;
 
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'extension/works_cupertino_dynamicColor_ext.dart';
+
 class ToolBarModel {
   int index;
   FocusNode focusNode;
@@ -281,7 +283,7 @@ class BlankToolBarTool{
         ),
         Positioned(top: 0,left: 0,bottom: 0,right: 0,child:
         ToolBar(height: toolBarHeight,
-          color: toolBarColor,
+          color: toolBarColor.toInvertDynamicColor().resolveFrom(context),
           tintColor: toolBarTintColor,
           focusNodeMap: model.focusNodeMap,
           doneCallback: (){

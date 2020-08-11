@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../extension/works_cupertino_dynamicColor_ext.dart';
 
 class BaseCell extends StatefulWidget
 {
@@ -103,7 +104,10 @@ class _BaseCell extends State<BaseCell>
       onTap: widget.tapCallback,
       onLongPress: widget.longPressCallback,
       behavior: HitTestBehavior.opaque,
-      child: Container(color: widget.selected ? widget.selectedColor : isHiLight ? widget.highlightColor : widget.normalColor, child: widget.child),
+      child: Container(
+          color: widget.selected ? widget.selectedColor.toInvertDynamicColor().resolveFrom(context) : isHiLight ?
+          widget.highlightColor.toInvertDynamicColor().resolveFrom(context) : widget.normalColor.toInvertDynamicColor().resolveFrom(context), 
+          child: widget.child),
     );
   }
 }

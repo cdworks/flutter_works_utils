@@ -7,9 +7,11 @@ import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
 
 
 /// Standard iOS navigation bar height without the status bar.
@@ -32,7 +34,9 @@ const double _kNavBarBackButtonTapWidth = 50.0;
 /// Title text transfer fade.
 const Duration _kNavBarTitleFadeDuration = Duration(milliseconds: 150);
 
-const Color _kDefaultNavBarBorderColor = Color(0x4D000000);
+const Color _kDefaultNavBarBorderColor = CupertinoDynamicColor.withBrightness(color: Color(0x4D000000),
+    darkColor: Color(0x4D000000 ^ 0x00FFFFFF))
+;
 
 const Border _kDefaultNavBarBorder = Border(
   bottom: BorderSide(
@@ -450,8 +454,40 @@ class _CupertinoNavigationBarState extends State<WorksCupertinoNavigationBar> {
       large: false,
     );
 
+    var dynamicBorder = widget.border;
+    if(dynamicBorder != null) {
+      var top = widget.border.top;
+      var bottom = widget.border.bottom;
+      var left = widget.border.left;
+      var right = widget.border.right;
+
+      if (top != null && top.color != null) {
+        top = top.copyWith(
+            color: CupertinoDynamicColor.resolve(top.color, context) ?? top.color);
+      }
+      if (bottom != null && bottom.color != null) {
+        bottom = bottom.copyWith(
+            color: CupertinoDynamicColor.resolve(bottom.color, context) ?? bottom.color);
+      }
+      if (left != null && left.color != null) {
+        left = left.copyWith(
+            color: CupertinoDynamicColor.resolve(left.color, context) ?? left.color);
+      }
+      if (right != null && right.color != null) {
+        right = bottom.copyWith(
+            color: CupertinoDynamicColor.resolve(right.color, context) ?? right.color);
+      }
+      dynamicBorder = Border(
+        top: top ?? BorderSide.none,
+        left: left ?? BorderSide.none,
+        right: right ?? BorderSide.none,
+        bottom: bottom?? BorderSide.none
+      );
+    }
+
+
     final Widget navBar = _wrapWithBackground(
-      border: widget.border,
+      border: dynamicBorder,
       backgroundColor: backgroundColor,
       brightness: widget.brightness,
       updateSystemUiOverlay: widget.isAutoWrapWithBackground,
@@ -495,7 +531,7 @@ class _CupertinoNavigationBarState extends State<WorksCupertinoNavigationBar> {
               backButtonTextStyle: CupertinoTheme.of(context).textTheme.navActionTextStyle,
               titleTextStyle: CupertinoTheme.of(context).textTheme.navTitleTextStyle,
               largeTitleTextStyle: null,
-              border: widget.border,
+              border: dynamicBorder,
               hasUserMiddle: widget.middle != null,
               largeExpanded: false,
               child: navBar,

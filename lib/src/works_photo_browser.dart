@@ -186,6 +186,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper>
         quality: 80,
         width: width == photoItem.originalWidth ? 0: width,
         height: height == photoItem.originalHeight ? 0: height,
+
       );
     }
     else if(photoItem  is String)
@@ -196,6 +197,8 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper>
             thumbPath = item['thumbPath'];
           }
         photoChild = Image.network(photoItem,
+          color: CupertinoDynamicColor.withBrightness(color: const Color(0xFFFFFFFF), darkColor: Color(0xFFB0B0B0)).resolveFrom(context),
+          colorBlendMode: BlendMode.modulate,
           loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
             if (loadingProgress == null) {
               return child;
@@ -208,7 +211,10 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper>
                     {
 
                     },
-                    child: Image.file(File(thumbPath),fit: BoxFit.fitWidth,width:
+                    child: Image.file(File(thumbPath),
+                      color: CupertinoDynamicColor.withBrightness(color: const Color(0xFFFFFFFF), darkColor: Color(0xFFB0B0B0)).resolveFrom(context),
+                      colorBlendMode: BlendMode.modulate,
+                      fit: BoxFit.fitWidth,width:
                     double.infinity,height: double.infinity,),
                   ),
 
@@ -237,7 +243,8 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper>
       }
     else if(photoItem is File)
       {
-        photoChild = Image.file(photoItem);
+        photoChild = Image.file(photoItem,color: CupertinoDynamicColor.withBrightness(color: const Color(0xFFFFFFFF), darkColor: Color(0xFFB0B0B0)).resolveFrom(context),
+          colorBlendMode: BlendMode.modulate,);
       }
     else
     {

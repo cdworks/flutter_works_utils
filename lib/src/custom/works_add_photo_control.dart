@@ -182,6 +182,8 @@ class _PhotoPickWidget extends State<PhotoPickWidget> {
                       Stack(children: <Widget>[
                         Image.network(
                           photo,
+                          color: CupertinoDynamicColor.withBrightness(color: const Color(0xFFFFFFFF), darkColor: Color(0xFFB0B0B0)).resolveFrom(context),
+                          colorBlendMode: BlendMode.modulate,
                           width: itemHeight,
                           height: itemHeight,
                           fit: BoxFit.cover,
@@ -261,6 +263,8 @@ class _PhotoPickWidget extends State<PhotoPickWidget> {
                   Stack(children: <Widget>[
                   Image.file(
                     photo,
+                    color: CupertinoDynamicColor.withBrightness(color: const Color(0xFFFFFFFF), darkColor: Color(0xFFB0B0B0)).resolveFrom(context),
+                    colorBlendMode: BlendMode.modulate,
                     width: itemHeight,
                     height: itemHeight,
                     fit: BoxFit.cover,

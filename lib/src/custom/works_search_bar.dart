@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../extension/works_cupertino_dynamicColor_ext.dart';
 
 
 class WorksSearchBar extends StatefulWidget
@@ -93,18 +94,18 @@ class _WorksSearchBar extends State<WorksSearchBar>
               },),
               suffixMode: OverlayVisibilityMode.editing,
               textInputAction: TextInputAction.search,
-              placeholderStyle: widget.placeHoldStyle ?? const TextStyle(
+              placeholderStyle: widget.placeHoldStyle ??  TextStyle(
                 fontSize: 14,
-                color: Color.fromARGB(76, 60, 60, 67),
+                color: Color.fromARGB(76, 60, 60, 67).toInvertDynamicColor().resolveFrom(context),
               ),
-              style: widget.style ?? const TextStyle(
+              style: widget.style ??  TextStyle(
                 fontSize: 14,
-                color: const Color(0xFF333333),
+                color: Color(0xFF333333).toInvertDynamicColor().resolveFrom(context),
               ),
               padding: widget.padding ?? EdgeInsets.all(6),
               cursorColor: widget.cursorColor ?? Colors.blue,
               decoration: BoxDecoration(
-                color: const Color(0xFFF0F2F5),
+                color:  Color(0xFFF0F2F5).toInvertDynamicColor().resolveFrom(context),
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
               ),
               controller: _controller,

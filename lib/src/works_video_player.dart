@@ -28,7 +28,7 @@ class WorksVideoPlayerScaffold extends CupertinoPageScaffold {
       top: false,
       child: Container(
           color: Colors.black,
-          child: MainWidget(this.musicBgPath,
+          child: _MainWidget(this.musicBgPath,
             videoUrl: videoUrl,
             videoPath: videoPath,
             isNeedLoad: isNeedLoad,
@@ -36,8 +36,8 @@ class WorksVideoPlayerScaffold extends CupertinoPageScaffold {
           )));
 }
 
-class MainWidget extends StatefulWidget {
-  const MainWidget(this.musicBgPath, {this.videoUrl, this.videoPath,this
+class _MainWidget extends StatefulWidget {
+  const _MainWidget(this.musicBgPath, {this.videoUrl, this.videoPath,this
       .isNeedLoad,this
       .isAudio});
 
@@ -50,11 +50,11 @@ class MainWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _MainWidget();
+    return __MainWidget();
   }
 }
 
-class _MainWidget extends State<MainWidget>
+class __MainWidget extends State<_MainWidget>
     with SingleTickerProviderStateMixin {
   bool isPortOri = true;
 
