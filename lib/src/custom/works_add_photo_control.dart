@@ -126,7 +126,7 @@ class _PhotoPickWidget extends State<PhotoPickWidget> {
                   onPressed: () async {
                     Navigator.pop(ctx, 2);
                     var imageFile =
-                        await ImagePicker.pickImage(source: ImageSource.camera);
+                        await ImagePicker().getImage(source: ImageSource.camera);
                     if (imageFile != null) {
                       setState(() {
                         widget.photos.add(imageFile);

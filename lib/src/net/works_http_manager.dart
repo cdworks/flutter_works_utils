@@ -265,17 +265,29 @@ class HttpManager
     return retData;
   }
 
-  static Future<HttpResponseData<T>> uploadFile<T>(String url,String file,{ProgressCallback progress,Map<String, dynamic> param,CancelToken cancelToken}) async
+  static Future<HttpResponseData<T>> uploadFile<T>(String url,dynamic fileInfo,{ProgressCallback progress,Map<String, dynamic> param,CancelToken cancelToken}) async
   {
     HttpResponseData<T> retData = HttpResponseData();
 
-    if(file == null || file.isEmpty)
+    if(fileInfo == null || fileInfo.isEmpty)
     {
       return null;
     }
 
     Map<String, dynamic> requestParam = param != null ? Map<String, dynamic>.from(param) : Map<String, dynamic>();
-    requestParam['file'] = await MultipartFile.fromFile(file,filename: "file0.jpg",contentType: MediaType.parse('image/jpeg'));
+
+    if(fileInfo is String) {
+      requestParam['file'] = await MultipartFile.fromFile(fileInfo, filename: "file0.jpg", contentType: MediaType.parse('image/jpeg'));
+    }
+    else if(fileInfo is List<int>)
+      {
+        requestParam['file'] =  MultipartFile.fromBytes(fileInfo, filename: "file0.jpg", contentType: MediaType.parse('image/jpeg'));
+      }
+    else
+      {
+        print('upload file info error!!');
+        return null;
+      }
 
     var postResponse = await _HttpSessionManager.getInstance().httpDio.post<
         _WorksResponseData<Map<String, dynamic>>>(
@@ -332,6 +344,75 @@ class HttpManager
     }
     return retData;
   }
+
+//  static Future<HttpResponseData<T>> uploadFileWithData<T>(String url,List<int> data,{ProgressCallback progress,Map<String, dynamic> param,CancelToken cancelToken}) async
+//  {
+//    HttpResponseData<T> retData = HttpResponseData();
+//
+//    if(data == null || data.isEmpty)
+//    {
+//      return null;
+//    }
+//
+//    Map<String, dynamic> requestParam = param != null ? Map<String, dynamic>.from(param) : Map<String, dynamic>();
+//
+//    requestParam['file'] = await MultipartFile.fromBytes(data,filename: "file0.jpg",contentType: MediaType.parse('image/jpeg'));
+//
+//    var postResponse = await _HttpSessionManager.getInstance().httpDio.post<
+//        _WorksResponseData<Map<String, dynamic>>>(
+//        url, data: FormData.fromMap(requestParam), onSendProgress: progress,cancelToken: cancelToken);
+//
+//    try {
+//      final response = postResponse.data;
+//      if (response.statusCode == 0) {
+//        var responseData = response.data;
+//        int code;
+//        if (responseData.containsKey('statusCode')) {
+//          var statusCode = responseData['statusCode'].toString();
+//          code = int.tryParse(statusCode);
+//        }
+//        else if (responseData.containsKey('code')) {
+//          var statusCode = responseData['code'].toString();
+//          code = int.tryParse(statusCode);
+//        }
+//        if (code == null) {
+//          retData.error = WorksError(-2000, userInfo: {
+//            WorksError.LocalizedDescriptionKey: "请求数据异常"
+//          });
+//        }
+//        else if (code != 0) {
+//          retData.error = WorksError(code, userInfo: {
+//            WorksError.LocalizedDescriptionKey: responseData['msg'] ?? "请求数据失败"
+//          });
+//        }
+//        else {
+//          if (responseData.containsKey('data')) {
+//            retData.data = responseData['data'];
+//          }
+//          else {
+//            retData.error = WorksError(-2000, userInfo: {
+//              WorksError.LocalizedDescriptionKey: "请求数据异常"
+//            });
+//          }
+//        }
+//      }
+//      else {
+//        retData.error = WorksError(response.statusCode, userInfo: {
+//          WorksError.LocalizedDescriptionKey: response.errorMessage
+//        });
+//      }
+//    }
+//    catch (e) {
+//      retData.error = WorksError(-3000, userInfo: {
+//        WorksError.LocalizedDescriptionKey: "请求数据异常"
+//      });
+//    }
+//
+//    if (retData != null && retData.error != null) {
+//      print('upload file error:${retData.error}');
+//    }
+//    return retData;
+//  }
 
   static Future<HttpResponseData<List<String>>> uploadMoreFiles(String url,List<String> files,{ProgressCallback progress,CancelToken cancelToken}) async
   {

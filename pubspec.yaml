@@ -24,7 +24,7 @@ dependencies:
 #      url: git://github.com/cdworks/flutter_asset_picker.git
 
   # 文件路径及操作
-  path_provider: ^1.6.0
+#  path_provider: ^1.6.0
 
   #裁剪图片
 #  image_crop: ^0.3.2
@@ -54,7 +54,7 @@ dependencies:
   flutter_progress_hud: ^1.0.2
 
   #网络状态监听
-  connectivity: '>=0.4.8+6 <2.0.0'
+  connectivity: '>=0.4.9 <2.0.0'
 
 dev_dependencies:
   flutter_test:
