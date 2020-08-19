@@ -11,6 +11,7 @@ export 'src/works_image_provider.dart';
 export 'src/works_keyboard_toolbar.dart';
 export 'src/works_photo_browser.dart';
 export 'src/works_utility.dart';
+export 'src/works_cubit.dart';
 
 export 'src/cell/base_cell.dart';
 export 'src/cell/cell_event.dart';
