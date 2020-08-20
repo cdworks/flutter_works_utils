@@ -17,12 +17,16 @@ class WorksSearchBar extends StatefulWidget
   final Color cursorColor;
   final TextStyle placeHoldStyle;
   final TextStyle style;
+  final TextStyle cancelStyle;
+  final Widget searchIcon;
   final bool isShowCancel;
+  final Widget cleanWidget;
+  final BoxDecoration decoration;
   final TextEditingController controller;
   const WorksSearchBar({this.textDidChange,this.cancelButtonClicked,this
       .searchButtonClicked,this.didBeginEditing,this.didEndEditing,this
       .padding,this.cursorColor,this.placeHold,this.placeHoldStyle,this
-      .style,this.isShowCancel = true,this.controller});
+      .style,this.isShowCancel = true,this.controller,this.cancelStyle,this.searchIcon,this.cleanWidget,this.decoration});
 
   @override
   State<StatefulWidget> createState() {
@@ -74,14 +78,15 @@ class _WorksSearchBar extends State<WorksSearchBar>
             flex: 1,
             child: CupertinoTextField(
 
-              prefix: Padding(padding: EdgeInsets.only(left: 6), child: Image.asset('utilImages/search_icon.png',width: 22,
+              prefix: Padding(padding: EdgeInsets.only(left: 6), child: widget.searchIcon ?? Image.asset('utilImages/search_icon.png',width: 22,
                 height: 22,alignment: Alignment.centerRight,package: 'works_utils',)),
               placeholder: widget.placeHold ?? '搜索',
               suffix: CupertinoButton(
                 padding:  EdgeInsets.only(right: 5),
                   minSize: 20,
-                  child: Icon(Icons.cancel,color: Colors
-                  .black26,size: 20,), onPressed: () {
+                  child: widget.cleanWidget ?? Icon(Icons.cancel,color: Colors
+                  .black26,size: 20,),
+                onPressed: () {
                   if(_controller.text.isNotEmpty)
                     {
 
@@ -104,7 +109,7 @@ class _WorksSearchBar extends State<WorksSearchBar>
               ),
               padding: widget.padding ?? EdgeInsets.all(6),
               cursorColor: widget.cursorColor ?? Colors.blue,
-              decoration: BoxDecoration(
+              decoration: widget.decoration ?? BoxDecoration(
                 color:  Color(0xFFF0F2F5).toInvertDynamicColor().resolveFrom(context),
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
               ),
@@ -145,7 +150,7 @@ class _WorksSearchBar extends State<WorksSearchBar>
                       widget.cancelButtonClicked();
                     }
                   },
-                  child: Text('取消', style: TextStyle(color: Colors.blue),),
+                  child: Text('取消', style: widget.cancelStyle ?? TextStyle(color: Colors.blue),),
                 ),
               )
           )

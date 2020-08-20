@@ -234,6 +234,9 @@ abstract class WorksBaseListWidgetState <T extends StatefulWidget> extends Works
   @protected
   HttpSendType get sendType => HttpSendType.Post;
 
+  @protected
+  Header get refreshHeader => null;
+
 
   @override
   Widget createMainView(BuildContext context) {
@@ -292,6 +295,7 @@ abstract class WorksBaseListWidgetState <T extends StatefulWidget> extends Works
 
     return (headerBuilder == null && footerBuilder == null) ?
     EasyRefresh(
+      header: refreshHeader,
         onRefresh: () async{
           await requestMainDataWithRefresh(isRefresh: true);
         }, child:listView) :
@@ -300,6 +304,7 @@ abstract class WorksBaseListWidgetState <T extends StatefulWidget> extends Works
         if(headerBuilder != null)
           headerBuilder(context),
         Expanded(child: EasyRefresh(
+            header: refreshHeader,
             onRefresh: () async{
               await requestMainData();
             }, child:listView),),
@@ -409,6 +414,9 @@ abstract class WorksBasePageListWidgetState <T extends StatefulWidget> extends W
 
   final ScrollController controller = ScrollController();
 
+  @protected
+  Header get refreshHeader => null;
+
 
 
   @protected
@@ -424,7 +432,7 @@ abstract class WorksBasePageListWidgetState <T extends StatefulWidget> extends W
   Color dividerColor(BuildContext context,int index) => const Color(0xFFF0F2F5);  //divider color
 
   @protected
-  ObjConvertCallback get convert;   //请求的数据转换方法（一般是字典转对象）
+  ObjConvertCallback get convert => null;   //请求的数据转换方法（一般是字典转对象）
 
   @protected
   HttpSendType get sendType => HttpSendType.Post;
@@ -604,6 +612,7 @@ abstract class WorksBasePageListWidgetState <T extends StatefulWidget> extends W
 
     return (headerBuilder == null && footerBuilder == null) ?
     EasyRefresh(
+      header: refreshHeader,
         onLoad: _hasMore ? () async
         {
           int index = (data.length/pageNumber).ceil() + 1;
@@ -617,6 +626,7 @@ abstract class WorksBasePageListWidgetState <T extends StatefulWidget> extends W
         if(headerBuilder != null)
           headerBuilder(context),
         Expanded(child: EasyRefresh(
+           header: refreshHeader,
             onLoad: _hasMore ? () async
             {
               int index = (data.length/pageNumber).ceil() + 1;
