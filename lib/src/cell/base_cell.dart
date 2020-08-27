@@ -71,14 +71,19 @@ class _BaseCell extends State<BaseCell>
           {
             widget.onHighlightChanged(false);
           }
-          setState(() {
-            isHiLight = false;
-          });
-        }
-        else
-          {
-            isHiLight = false;
+          if(mounted) {
+            setState(() {
+              isHiLight = false;
+            });
           }
+        }
+        else {
+          if (mounted) {
+            setState(() {
+              isHiLight = false;
+            });
+          }
+        }
       },
       onTapUp: (TapUpDetails details)
       {
@@ -90,15 +95,21 @@ class _BaseCell extends State<BaseCell>
           }
           
           Future.delayed(Duration(milliseconds: 50),(){
-            setState(() {
-              isHiLight = false;
-            });
+            if (mounted) {
+              setState(() {
+                isHiLight = false;
+              });
+            }
           });
 
         }
         else
         {
-          isHiLight = false;
+          if(mounted) {
+            setState(() {
+              isHiLight = false;
+            });
+          }
         }
       },
       onTap: widget.tapCallback,
