@@ -21,9 +21,8 @@ dependencies:
   flutter_keyboard_visibility: ^2.0.0
 
   asset_picker:
-    path: /Users/liping/works_github/flutter_asset_picker
-#    git:
-#      url: git://github.com/cdworks/flutter_asset_picker.git
+#    path: /Users/liping/works_github/flutter_asset_picker
+    git: git://github.com/cdworks/flutter_asset_picker.git
 
   # 文件路径及操作
 #  path_provider: ^1.6.0
